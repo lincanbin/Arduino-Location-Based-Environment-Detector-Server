@@ -1,0 +1,6 @@
+RewriteEngine On
+RewriteCond %{REQUEST_METHOD} ^TRACE
+RewriteRule .* - [F]
+
+RewriteBase  /
+RewriteRule ^(.*)-(.*)-(.*)-(.*)-(.*)-(.*)$ submit.php?device_index=$1&longitude=$2&latitude=$3&temperature=$4&humidity=$5&particulate_matter=$6 [L]
