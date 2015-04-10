@@ -3,7 +3,9 @@ include(dirname(__FILE__)."/common.php");
 //Debug Data:
 //device_index=13726247339&longitude=113.540718&latitude=22.256467&temperature=32.5&humidity=90&particulate_matter=25
 $data = array();
-foreach ($DB->query('Select * FROM logs WHERE device_index=? ORDER BY time ASC',array($_GET['index'])) as $key => $value) {
+$Result = $DB->query('Select * FROM logs WHERE device_index=? ORDER BY time ASC',array(Request('Get', 'index', 0)));
+$Width = count($Result)*40;
+foreach ($Result as $key => $value) {
 	$value['time'] = FormatTime($value['time']);
 	$data[] = $value;
 }
@@ -14,13 +16,15 @@ foreach ($DB->query('Select * FROM logs WHERE device_index=? ORDER BY time ASC',
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
-	<title>历史监测数据</title>
+	<title><?php echo $DB->single('Select name FROM device WHERE device_index=?', array(
+	Request('Get', 'index', 0)
+	)); ?> 历史监测数据</title>
 </head>
 <body>
 	<script src="http://libs.baidu.com/jquery/1.10.2/jquery.min.js" type="text/javascript"></script>
 	<script src="http://ourjnu.com/static/js/highcharts.js"></script>
 	<script src="http://ourjnu.com/static/js/exporting.js"></script>
-	<div id="container" style="width:100%; min-width: 310px; height: 640px; margin: 0 auto"></div>
+	<div id="container" style="width:100%; min-width: <?php echo $Width; ?>px; height: 600px; margin: 0 auto"></div>
 	<script>
 	$(function () {
 		$('#container').highcharts({
