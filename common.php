@@ -1,5 +1,5 @@
 <?php
-date_default_timezone_set('PRC');
+date_default_timezone_set('Asia/Shanghai');
 
 require(dirname(__FILE__)."/includes/PDO.class.php");
 
