@@ -1,9 +1,15 @@
 <?php
 date_default_timezone_set('PRC');
-require(dirname(__FILE__)."/includes/PDO.class.php");
-$DB = new Db();
 
-$TimeStamp = time();
+require(dirname(__FILE__)."/includes/PDO.class.php");
+
+define('DBHost', '127.0.0.1'); 
+define('DBName', 'monitor');
+define('DBUser', 'root'); 
+define('DBPassword', ''); 
+$DB = new Db(DBHost, DBName, DBUser, DBPassword); 
+
+$TimeStamp = $_SERVER['REQUEST_TIME'];
 
 function Request($Type, $Key ,$DefaultValue='')
 {
