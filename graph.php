@@ -3,8 +3,7 @@ include(dirname(__FILE__)."/common.php");
 //Debug Data:
 //device_index=13726247339&longitude=113.540718&latitude=22.256467&temperature=32.5&humidity=90&particulate_matter=25
 $data = array();
-foreach ($DB->query('Select * FROM logs WHERE device_index=?',array($_GET['index'])) as $key => $value)
-{
+foreach ($DB->query('Select * FROM logs WHERE device_index=? ORDER BY time ASC',array($_GET['index'])) as $key => $value) {
 	$value['time'] = FormatTime($value['time']);
 	$data[] = $value;
 }
