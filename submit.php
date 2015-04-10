@@ -12,9 +12,9 @@ $insert = array(
 	Request('Get', 'humidity', 0),
 	Request('Get', 'particulate_matter', 0)
 );
-if (($TimeStamp - 60) > $DB->single('Select lasttime FROM device WHERE device_index=?', array(
+if (($TimeStamp - 600) > $DB->single('Select lasttime FROM device WHERE device_index=?', array(
 	Request('Get', 'device_index', 0)
-))) { //至少60秒才更新一次数据
+))) { //至少600秒才更新一次数据
 	$DB->query("INSERT INTO `logs`(`id`, `device_index`, `time`, `longitude`, `latitude`, `temperature`, `humidity`, `particulate_matter`) VALUES (?,?,?,?,?,?,?,?)", $insert);
 	$DB->query("UPDATE device SET lasttime=?,longitude=?,latitude=?,temperature=?,humidity=?,particulate_matter=? WHERE device_index=?", array(
 		$TimeStamp,
