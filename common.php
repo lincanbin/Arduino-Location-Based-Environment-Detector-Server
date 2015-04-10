@@ -51,12 +51,8 @@ function FormatTime($db_time)
 		// 小于30天如下显示
 		if ($diftime >= 86400) {
 			return round($diftime / 86400, 0) . '天前';
-		} else if ($diftime >= 3600) {
-			return round($diftime / 3600, 0) . '小时前';
-		} else if ($diftime >= 60) {
-			return round($diftime / 60, 0) . '分钟前';
 		} else {
-			return ($diftime + 1) . '秒钟前';
+			return date("G:i", $db_time);
 		}
 	} else {
 		// 大于一年
