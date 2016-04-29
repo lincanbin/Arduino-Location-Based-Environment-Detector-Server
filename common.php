@@ -46,18 +46,6 @@ function ArrayColumn($Input, $ColumnKey)
 // 格式化时间
 function FormatTime($db_time)
 {
-	$diftime = time() - $db_time;
-	if ($diftime < 2592000) {
-		// 小于30天如下显示
-		if ($diftime >= 86400) {
-			return round($diftime / 86400, 0) . '天前';
-		} else {
-			return date("G:i", $db_time);
-		}
-	} else {
-		// 大于一年
-		return date("Y-m-d", $db_time);
-		//gmdate()可以返回格林威治标准时，date()则为当地时
-	}
+	return date("Y-m-d H:i", $db_time);
 }
 ?>
